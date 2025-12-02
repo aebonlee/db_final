@@ -194,6 +194,42 @@ const questions = [
         options: ['슈퍼키', '대체키', '외래키', '부분키'],
         answer: 1,
         explanation: '후보키들 중 하나가 기본키로 선정되고, 나머지 후보키들을 대체키(Alternate Key) 라고 부릅니다.',
+        guide: {
+            title: '키의 종류와 관계',
+            content: `
+                <h4>🗝️ 데이터베이스 키의 계층구조</h4>
+                
+                <h5>🔹 슈퍼키 (Super Key)</h5>
+                <ul>
+                    <li>튜플을 유일하게 식별할 수 있는 속성들의 집합</li>
+                    <li>가장 넓은 범위의 키</li>
+                </ul>
+                
+                <h5>🔹 후보키 (Candidate Key)</h5>
+                <ul>
+                    <li>최소성을 만족하는 슈퍼키</li>
+                    <li>기본키가 될 수 있는 모든 키</li>
+                </ul>
+                
+                <h5>🔹 기본키 (Primary Key)</h5>
+                <ul>
+                    <li>후보키 중에서 선택된 대표 키</li>
+                    <li>테이블당 1개만 존재</li>
+                </ul>
+                
+                <h5>🔹 대체키 (Alternate Key)</h5>
+                <ul>
+                    <li>기본키로 선택되지 않은 나머지 후보키들</li>
+                    <li>유일성 제약조건 설정 가능</li>
+                </ul>
+                
+                <h5>🔹 외래키 (Foreign Key)</h5>
+                <ul>
+                    <li>다른 테이블의 기본키를 참조하는 키</li>
+                    <li>참조 무결성 제약조건</li>
+                </ul>
+            `
+        }
     },
     {
         id: 7,
@@ -202,6 +238,34 @@ const questions = [
         options: ['NULL을 절대 가질 수 없다', '다른 테이블의 기본키를 참조한다', '유일성만 만족하면 된다', '기본키가 아닌 속성을 의미한다'],
         answer: 1,
         explanation: '외래키는 다른 릴레이션의 기본키를 참조하는 속성입니다. 경우에 따라 NULL을 가질 수 있으며, 유일성은 필수 조건이 아닙니다(중복 허용 가능).',
+        guide: {
+            title: '외래키(Foreign Key)',
+            content: `
+                <h4>🔗 외래키의 특징과 제약조건</h4>
+                
+                <h5>🔹 외래키의 정의</h5>
+                <ul>
+                    <li>다른 릴레이션의 기본키를 참조하는 속성</li>
+                    <li>테이블 간 관계를 연결하는 역할</li>
+                    <li>참조하는 테이블을 자식(Child), 참조되는 테이블을 부모(Parent)</li>
+                </ul>
+                
+                <h5>🔹 외래키 제약조건</h5>
+                <ul>
+                    <li><strong>참조 무결성</strong> - 참조하는 값은 반드시 존재해야 함</li>
+                    <li>NULL 값 허용 가능 (선택적 관계)</li>
+                    <li>중복 값 허용 가능</li>
+                    <li>자기 자신 참조 가능</li>
+                </ul>
+                
+                <h5>🔹 참조 무결성 규칙</h5>
+                <ul>
+                    <li><strong>제한 (RESTRICT)</strong> - 참조되는 튜플 삭제/수정 금지</li>
+                    <li><strong>연쇄 (CASCADE)</strong> - 참조되는 튜플과 함께 삭제/수정</li>
+                    <li><strong>널값 설정 (SET NULL)</strong> - 외래키를 NULL로 설정</li>
+                </ul>
+            `
+        }
     },
     {
         id: 8,
@@ -210,6 +274,34 @@ const questions = [
         options: ['내부 구조 변경 시 응용프로그램 영향 없음', '논리 구조 변경 시 응용프로그램 영향 없음', '저장 장치 변경 가능', '뷰 변경 가능'],
         answer: 1,
         explanation: '논리적 독립성은 개념 스키마(논리 구조) 변경이 있어도 응용프로그램(외부 스키마)에 영향을 주지 않는 것을 말합니다.',
+        guide: {
+            title: '데이터 독립성',
+            content: `
+                <h4>🔄 데이터 독립성의 종류</h4>
+                
+                <h5>🔹 논리적 독립성 (Logical Independence)</h5>
+                <ul>
+                    <li>개념 스키마 변경이 외부 스키마에 영향 없음</li>
+                    <li>테이블 구조 변경이 응용프로그램에 영향 없음</li>
+                    <li>뷰(View)를 통해 구현</li>
+                    <li>예: 테이블에 새 컬럼 추가</li>
+                </ul>
+                
+                <h5>🔹 물리적 독립성 (Physical Independence)</h5>
+                <ul>
+                    <li>내부 스키마 변경이 개념 스키마에 영향 없음</li>
+                    <li>저장 구조 변경이 논리 구조에 영향 없음</li>
+                    <li>예: 인덱스 추가, 파일 구조 변경</li>
+                </ul>
+                
+                <h5>🔹 데이터 독립성의 장점</h5>
+                <ul>
+                    <li>유지보수 비용 절감</li>
+                    <li>데이터베이스 구조 변경의 유연성</li>
+                    <li>응용프로그램 재작성 불필요</li>
+                </ul>
+            `
+        }
     },
     {
         id: 9,
@@ -218,6 +310,31 @@ const questions = [
         options: ['이상 현상 제거', '데이터 중복 최소화', '저장공간 증가', '데이터 일관성 유지'],
         answer: 2,
         explanation: '정규화는 중복 감소, 이상(삽입·삭제·갱신) 현상 제거, 일관성과 무결성 향상이 목적입니다. 저장공간은 보통 줄어들지 늘어나지 않습니다.',
+        guide: {
+            title: '정규화(Normalization)',
+            content: `
+                <h4>🎯 정규화의 목적과 과정</h4>
+                
+                <h5>🔹 정규화의 주요 목적</h5>
+                <ul>
+                    <li><strong>이상 현상 제거</strong> - 삽입, 삭제, 갱신 이상 방지</li>
+                    <li><strong>데이터 중복 최소화</strong> - 저장공간 효율성</li>
+                    <li><strong>데이터 일관성 유지</strong> - 무결성 향상</li>
+                    <li><strong>테이블 구조 개선</strong> - 논리적 설계 최적화</li>
+                </ul>
+                
+                <h5>🔹 이상 현상의 종류</h5>
+                <ul>
+                    <li><strong>삽입 이상</strong> - 불필요한 데이터를 함께 입력</li>
+                    <li><strong>삭제 이상</strong> - 필요한 데이터까지 함께 삭제</li>
+                    <li><strong>갱신 이상</strong> - 데이터 불일치 발생</li>
+                </ul>
+                
+                <h5>🔹 정규화 과정</h5>
+                <p>1NF → 2NF → 3NF → BCNF → 4NF → 5NF</p>
+                <p>보통 3NF까지 정규화하면 충분</p>
+            `
+        }
     },
     {
         id: 10,
@@ -226,6 +343,33 @@ const questions = [
         options: ['기본키가 완전 함수 종속', '원자 값이어야 함', '이행 종속 제거', '모든 결정자가 후보키'],
         answer: 1,
         explanation: '제1정규형(1NF)은 모든 속성이 원자 값(더 이상 분해되지 않는 값) 을 가져야 합니다. 복합값·반복 속성을 허용하지 않습니다.',
+        guide: {
+            title: '제1정규형(1NF)',
+            content: `
+                <h4>📝 제1정규형의 조건과 예시</h4>
+                
+                <h5>🔹 1NF 조건</h5>
+                <ul>
+                    <li>모든 속성은 <strong>원자 값</strong>만 가져야 함</li>
+                    <li>반복 그룹(다중 값) 제거</li>
+                    <li>복합 속성 분해</li>
+                </ul>
+                
+                <h5>⚠️ 1NF 위반 예시</h5>
+                <table style="border: 1px solid #ccc; margin: 10px 0;">
+                    <tr><th>학번</th><th>이름</th><th>과목</th></tr>
+                    <tr><td>1001</td><td>김철수</td><td>수학, 영어, 과학</td></tr>
+                </table>
+                
+                <h5>✅ 1NF 만족 예시</h5>
+                <table style="border: 1px solid #ccc; margin: 10px 0;">
+                    <tr><th>학번</th><th>이름</th><th>과목</th></tr>
+                    <tr><td>1001</td><td>김철수</td><td>수학</td></tr>
+                    <tr><td>1001</td><td>김철수</td><td>영어</td></tr>
+                    <tr><td>1001</td><td>김철수</td><td>과학</td></tr>
+                </table>
+            `
+        }
     },
     {
         id: 11,
@@ -234,6 +378,15 @@ const questions = [
         options: ['원자성', '부분 함수 종속 제거', '다치 종속 제거', '이행 종속 제거'],
         answer: 1,
         explanation: '제2정규형(2NF)은 1NF를 만족하면서 기본키가 복합키일 때, 기본키의 일부에만 종속되는 속성(부분 함수 종속)을 제거한 상태입니다.',
+        guide: {
+            title: '제2정규형(2NF)',
+            content: `
+                <h4>📝 제2정규형의 조건과 예시</h4>
+                <p><strong>조건:</strong> 1NF를 만족하면서 부분 함수 종속을 제거한 상태</p>
+                <p><strong>부분 함수 종속:</strong> 복합키의 일부에만 종속되는 속성이 있는 경우</p>
+                <p><strong>해결방법:</strong> 테이블을 분해하여 부분 함수 종속을 제거</p>
+            `
+        }
     },
     {
         id: 12,
@@ -242,6 +395,15 @@ const questions = [
         options: ['부분 함수 종속', '이행적 함수 종속', '다치 종속', '조인 종속'],
         answer: 1,
         explanation: '제3정규형(3NF)은 2NF를 만족하면서 일반 속성 간의 이행 함수 종속(X→Y, Y→Z ⇒ X→Z) 를 제거한 정규형입니다.',
+        guide: {
+            title: '제3정규형(3NF)',
+            content: `
+                <h4>📝 제3정규형의 조건과 예시</h4>
+                <p><strong>조건:</strong> 2NF를 만족하면서 이행적 함수 종속을 제거한 상태</p>
+                <p><strong>이행적 함수 종속:</strong> X→Y, Y→Z 관계에서 X→Z가 성립하는 경우</p>
+                <p><strong>해결방법:</strong> 테이블을 분해하여 이행 종속을 제거</p>
+            `
+        }
     },
     {
         id: 13,
@@ -250,6 +412,18 @@ const questions = [
         options: ['트랜잭션이 모두 수행되거나 취소', '데이터의 무결성 유지', '다른 트랜잭션 간 간섭 없음', '영구적으로 저장됨'],
         answer: 1,
         explanation: '일관성(Consistency)은 트랜잭션 수행 전·후에 DB가 정의된 무결성 제약 조건을 항상 만족하는 상태를 말합니다.',
+        guide: {
+            title: '트랜잭션의 ACID 특성',
+            content: `
+                <h4>🔐 ACID 트랜잭션 특성</h4>
+                <ul>
+                    <li><strong>Atomicity (원자성):</strong> All or Nothing - 모두 실행되거나 전혀 실행되지 않음</li>
+                    <li><strong>Consistency (일관성):</strong> 트랜잭션 실행 전후 무결성 제약조건을 만족</li>
+                    <li><strong>Isolation (고립성):</strong> 트랜잭션들이 서로 간섭하지 않음</li>
+                    <li><strong>Durability (지속성):</strong> 완료된 트랜잭션 결과가 영구적으로 반영</li>
+                </ul>
+            `
+        }
     },
     {
         id: 14,
@@ -266,6 +440,17 @@ const questions = [
         options: ['작업 취소 및 이전상태 복구', '작업 영구 반영', '인덱스 생성', '제약 조건 생성'],
         answer: 0,
         explanation: 'ROLLBACK은 트랜잭션 내의 변경 작업을 모두 취소하고 트랜잭션 시작 전 상태로 복구하는 명령입니다.',
+        guide: {
+            title: '트랜잭션 제어',
+            content: `
+                <h4>⚡ 트랜잭션 제어 명령어</h4>
+                <ul>
+                    <li><strong>COMMIT:</strong> 트랜잭션의 모든 변경사항을 영구적으로 저장</li>
+                    <li><strong>ROLLBACK:</strong> 트랜잭션의 모든 변경사항을 취소하고 이전 상태로 복원</li>
+                    <li><strong>SAVEPOINT:</strong> 트랜잭션 내부에 중간 저장점 설정</li>
+                </ul>
+            `
+        }
     },
     {
         id: 16,
@@ -274,6 +459,15 @@ const questions = [
         options: ['DISTINCT', 'UNIQUE', 'REMOVE', 'CLEAN'],
         answer: 0,
         explanation: 'SELECT 문의 결과에서 중복 튜플을 제거할 때 DISTINCT 키워드를 사용합니다.',
+        guide: {
+            title: 'SQL SELECT 구문',
+            content: `
+                <h4>🔍 SQL SELECT 기본 문법</h4>
+                <p><strong>DISTINCT:</strong> 중복된 레코드를 제거하여 고유한 값만 반환</p>
+                <p><strong>사용법:</strong> SELECT DISTINCT 컬럼명 FROM 테이블명;</p>
+                <p><strong>예시:</strong> SELECT DISTINCT 학과 FROM 학생;</p>
+            `
+        }
     },
     {
         id: 17,
