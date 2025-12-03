@@ -433,86 +433,87 @@ function updateReferenceGuide() {
 function generateBasicGuide(question) {
     const questionText = question.question.toLowerCase();
     
-    // HTML 관련 문제
-    if (questionText.includes('html') || questionText.includes('태그') || questionText.includes('element')) {
+    // 데이터베이스 기초 관련 문제
+    if (questionText.includes('데이터베이스') || questionText.includes('dbms') || questionText.includes('장점') || questionText.includes('단점')) {
         return {
-            title: 'HTML 기초 가이드',
+            title: '데이터베이스 시스템 기초',
             content: `
-                <h5>📖 HTML 핵심 개념</h5>
+                <h5>📊 데이터베이스 시스템 핵심 개념</h5>
                 <ul>
-                    <li><strong>시맨틱 HTML</strong>: 의미를 가진 태그 사용</li>
-                    <li><strong>구조와 내용 분리</strong>: HTML은 구조만 담당</li>
-                    <li><strong>접근성</strong>: 모든 사용자가 이용할 수 있도록</li>
+                    <li><strong>DBMS</strong>: 데이터베이스 관리 시스템</li>
+                    <li><strong>장점</strong>: 중복 최소화, 공유, 무결성, 독립성</li>
+                    <li><strong>단점</strong>: 초기 비용, 복잡성, 전문 인력 필요</li>
                 </ul>
                 <div class="code-example">
-                    <h5>💡 기본 HTML 구조</h5>
-                    <pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="ko"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;title&gt;페이지 제목&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;제목&lt;/h1&gt;
-    &lt;p&gt;내용&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+                    <h5>💡 DBMS 3대 기능</h5>
+                    <pre><code>정의 기능(DDL): CREATE, ALTER, DROP
+조작 기능(DML): SELECT, INSERT, UPDATE, DELETE
+제어 기능(DCL): GRANT, REVOKE, COMMIT, ROLLBACK</code></pre>
                 </div>
             `
         };
     }
     
-    // CSS 관련 문제
-    if (questionText.includes('css') || questionText.includes('스타일') || questionText.includes('선택자')) {
+    // 정규화 관련 문제
+    if (questionText.includes('정규') || questionText.includes('1nf') || questionText.includes('2nf') || questionText.includes('3nf') || questionText.includes('종속')) {
         return {
-            title: 'CSS 기초 가이드',
+            title: '데이터베이스 정규화',
             content: `
-                <h5>🎨 CSS 핵심 개념</h5>
+                <h5>🔧 정규화 핵심 개념</h5>
                 <ul>
-                    <li><strong>선택자</strong>: HTML 요소를 선택하는 방법</li>
-                    <li><strong>박스 모델</strong>: margin, border, padding, content</li>
-                    <li><strong>레이아웃</strong>: Flexbox, Grid 활용</li>
+                    <li><strong>1NF</strong>: 모든 속성이 원자값</li>
+                    <li><strong>2NF</strong>: 1NF + 부분함수종속 제거</li>
+                    <li><strong>3NF</strong>: 2NF + 이행함수종속 제거</li>
                 </ul>
                 <div class="code-example">
-                    <h5>💡 기본 CSS 문법</h5>
-                    <pre><code>선택자 {
-    속성: 값;
-    속성: 값;
-}
-
-/* 예시 */
-.container {
-    display: flex;
-    justify-content: center;
-}</code></pre>
+                    <h5>💡 정규화 목적</h5>
+                    <pre><code>✅ 이상 현상 제거 (삽입, 삭제, 갱신)
+✅ 데이터 중복 최소화
+✅ 데이터 일관성 유지</code></pre>
                 </div>
             `
         };
     }
     
-    // JavaScript 관련 문제
-    if (questionText.includes('javascript') || questionText.includes('js') || questionText.includes('변수') || questionText.includes('함수')) {
+    // SQL 관련 문제
+    if (questionText.includes('sql') || questionText.includes('select') || questionText.includes('where') || questionText.includes('join') || questionText.includes('group')) {
         return {
-            title: 'JavaScript 기초 가이드',
+            title: 'SQL 기본 구문',
             content: `
-                <h5>⚡ JavaScript 핵심 개념</h5>
+                <h5>⚡ SQL 핵심 명령어</h5>
                 <ul>
-                    <li><strong>변수 선언</strong>: const, let, var</li>
-                    <li><strong>함수</strong>: 재사용 가능한 코드 블록</li>
-                    <li><strong>DOM 조작</strong>: 웹 페이지 동적 변경</li>
+                    <li><strong>DDL</strong>: CREATE, ALTER, DROP</li>
+                    <li><strong>DML</strong>: SELECT, INSERT, UPDATE, DELETE</li>
+                    <li><strong>DCL</strong>: GRANT, REVOKE</li>
                 </ul>
                 <div class="code-example">
-                    <h5>💡 기본 JavaScript 문법</h5>
-                    <pre><code>// 변수 선언
-const name = 'JavaScript';
-
-// 함수 선언
-function greet() {
-    console.log('Hello!');
-}
-
-// DOM 조작
-document.getElementById('myElement');</code></pre>
+                    <h5>💡 기본 SELECT 구문</h5>
+                    <pre><code>SELECT 컬럼명
+FROM 테이블명
+WHERE 조건
+GROUP BY 그룹컬럼
+ORDER BY 정렬컬럼;</code></pre>
+                </div>
+            `
+        };
+    }
+    
+    // 키와 무결성 관련 문제
+    if (questionText.includes('키') || questionText.includes('기본키') || questionText.includes('외래키') || questionText.includes('무결성')) {
+        return {
+            title: '키와 무결성 제약조건',
+            content: `
+                <h5>🔑 키의 종류</h5>
+                <ul>
+                    <li><strong>기본키(PK)</strong>: 튜플을 고유하게 식별</li>
+                    <li><strong>외래키(FK)</strong>: 다른 테이블의 기본키 참조</li>
+                    <li><strong>후보키</strong>: 기본키가 될 수 있는 속성</li>
+                </ul>
+                <div class="code-example">
+                    <h5>💡 무결성 제약조건</h5>
+                    <pre><code>개체 무결성: 기본키는 NULL 불가
+참조 무결성: 외래키는 참조 테이블에 존재해야 함
+도메인 무결성: 속성값은 도메인 범위 내</code></pre>
                 </div>
             `
         };
@@ -520,13 +521,14 @@ document.getElementById('myElement');</code></pre>
     
     // 기본 가이드
     return {
-        title: '웹 개발 기초 가이드',
+        title: '데이터베이스 기초 가이드',
         content: `
-            <h5>🌐 웹 개발 핵심 요소</h5>
+            <h5>🗃️ 데이터베이스 핵심 요소</h5>
             <ul>
-                <li><strong>HTML</strong>: 웹 페이지의 구조와 내용</li>
-                <li><strong>CSS</strong>: 스타일과 레이아웃</li>
-                <li><strong>JavaScript</strong>: 동적 기능과 상호작용</li>
+                <li><strong>DBMS</strong>: 데이터베이스 관리 시스템</li>
+                <li><strong>SQL</strong>: 구조화된 질의 언어</li>
+                <li><strong>정규화</strong>: 데이터 중복과 이상 현상 제거</li>
+                <li><strong>트랜잭션</strong>: ACID 특성을 만족하는 작업 단위</li>
             </ul>
             <p><strong>💡 팁:</strong> 문제를 차근차근 읽고 핵심 키워드를 찾아보세요.</p>
             <p>결과 페이지에서 상세한 해설을 확인할 수 있습니다!</p>
